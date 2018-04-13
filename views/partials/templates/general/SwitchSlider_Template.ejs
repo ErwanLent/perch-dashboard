@@ -1,0 +1,9 @@
+<script type="text/x-template" id="switch-slider-template">
+	<div class="switch white">
+		<input type="radio" :name="id" value="left" :id="id + '-switch-left'" v-model="checked">
+		<input type="radio" :name="id" value="right" :id="id + '-switch-right'" v-model="checked">
+		<label :for="id + '-switch-left'">{{ text[0] }}</label>
+		<label :for="id + '-switch-right'">{{ text[1] }}</label>
+		<span class="toggle"></span>
+	</div>
+</script>

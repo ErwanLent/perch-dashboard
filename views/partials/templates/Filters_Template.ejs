@@ -1,0 +1,71 @@
+<script type="text/x-template" id="filters-template">
+  <div class="highlight-card  filters-card" v-bind:class="{ closed: !isOpen }">
+     <div class="card-header  clearfix">
+        <div class="card-title">
+          <span class="filters-title">
+             Filters
+             <div data-content="Filler content." class="help-icon  help-popup  float-right  pointer"><i class="help circle icon"></i></div>            
+          </span>
+
+            <span class="filter-icon" @click="isOpen = !isOpen">
+              <i class="chevron up icon rotate" v-bind:class="{ rotateDown: isOpen }"></i>
+            </span>
+        </div>
+     </div>
+     <div class="card-content" ref="filters">
+        <div class="indicator-row  flexbox">
+           <div class="item">
+              <div class="value">
+                 
+                <div class="ui grid">
+                  <div class="five wide column">
+                    <h2>Locations</h2>
+
+                    <template v-for="location in Object.keys(State.filters.locations)">
+                      <checkbox :text="Chains[location].name" :name="location" :checked="State.filters.locations[location].isChecked" :onToggle="onLocationsCheckboxChange"></checkbox>
+                    </template>
+                  </div>
+
+                  <div class="five wide column">
+                    <h2>Dates</h2>
+                    <date-range-picker></date-range-picker>
+                  </div>
+
+                  <div class="six wide column">
+                    <h2>Visit Dayparts</h2>
+
+                    <div class="button-day-parts">
+                      <div class="ui button tiny day-part">
+                        Breakfast
+                        <div class="label">6am - 11am</div>
+                      </div>
+
+                      <div class="ui button tiny day-part toggled">
+                        Lunch
+                        <div class="label">11am - 3pm</div>
+                      </div>
+
+                      <div class="ui button tiny day-part">
+                        Dinner
+                        <div class="label">4pm - 9pm</div>
+                      </div>
+
+                      <div class="ui button tiny day-part">
+                        Custom
+                        <div class="label">Set Daypart</div>
+                      </div>                                            
+                    </div>
+
+                    <div class="label filters-label">
+                      Includes devices that visited during the specified dayparts
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>            
+</script>

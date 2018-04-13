@@ -1,0 +1,14 @@
+<script type="text/x-template" id="dropdown-template">
+
+  <div class="ui selection dropdown">
+    <input type="hidden">
+    <i class="dropdown icon"></i>
+    <div class="default text" v-html="placeholder"></div>
+    <div class="menu">
+      <template v-for="item in items">
+        <div class="item" :data-value="item" v-html="item"></div>
+      </template>      
+    </div>
+  </div>
+
+</script>

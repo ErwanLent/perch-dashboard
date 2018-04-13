@@ -1,0 +1,36 @@
+<script type="text/x-template" id="modal-template">
+
+  <transition name="vue-modal">
+    <div class="vue-modal-mask">
+      <div class="vue-modal-wrapper">
+        <div class="vue-modal-container" :class="size">
+
+          <div class="vue-modal-header">
+            <slot name="header">
+              default header
+            </slot>
+            <div class="btn-close" @click="$emit('close')"></div>
+          </div>
+
+          <div class="vue-modal-content" :style="modalContentStyle">
+            <slot name="content">
+              default body
+            </slot>
+          </div>
+
+          <div class="vue-modal-footer">
+            <slot name="footer">
+              <div style="margin-bottom: 45px">
+                <button class="vue-modal-default-button ui button" @click="$emit('close')">
+                  OK
+                </button>
+              </div>
+            </slot>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </transition>
+
+</script>

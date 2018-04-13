@@ -1,0 +1,23 @@
+<script type="text/x-template" id="sidebar-template">
+	<div class="sidebar">
+
+		<div class="ui mini left icon input">
+			<input type="text" v-model="searchQuery" placeholder="Search...">
+			<i class="search icon"></i>
+		</div>
+
+		<div class="ui divided very relaxed list">
+			<div class="item" v-for="dashboard in filteredItems">
+				<div class="content">
+					<div class="header truncate">
+						{{ dashboard.name }}
+					</div>
+					<div class="client truncate">
+						{{ dashboard.client }}	
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</script>

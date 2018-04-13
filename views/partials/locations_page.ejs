@@ -1,0 +1,13 @@
+<div id="LocationsPage" v-show="visible">
+	<div class="interactive-area">
+        <div class="side-by-side">
+            <div class="side  large">
+                <locations-map :selected-map-store="selectedMapStore" ref="storeLeaderboardMap"></locations-map>
+            </div>
+
+            <div class="side  small">
+                <locations-table :selected-table-store="selectedTableStore" ref="storeLeaderboard"></locations-table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<script type="text/x-template" id="visitation-score-template">
+    <div class="highlight-card  visitor-card">
+        <loading-overlay ref="loader"></loading-overlay>
+
+        <!-- Card Header -->
+        <div class="card-header big clearfix">
+            <div class="flexbox space-between">
+                <div class="card-title">
+                    Competitive Visitation Score
+                    <div class="help-icon  help-popup  inline-block  pointer">
+                        <i class="help circle icon" data-content="filler content"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="help-text">
+                Competitive Visitation Score viewed over time
+            </div>
+        </div>
+        <!-- END Card Header -->
+
+        <!-- Card Content -->
+        <div class="card-content  flexbox">
+            <div class="chart  visitor-card-chart">
+                <highcharts :options="visitationScoreChart" ref="visitationScoreChart" class="visitor-card-chart"></highcharts>
+            </div>
+        </div>
+        <!-- END Card Content -->
+    </div>
+</script>

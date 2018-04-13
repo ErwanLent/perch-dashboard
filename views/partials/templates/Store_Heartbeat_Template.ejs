@@ -1,0 +1,28 @@
+<script type="text/x-template" id="store-heartbeat-template">
+    <div class="highlight-card  store-heartbeat-card">
+        <loading-overlay ref="loader"></loading-overlay>
+        <!-- Card Header -->
+        <div class="card-header  clearfix">
+            <div class="card-title">
+                <span class="heartbeat-title">
+                    Heartbeat
+                    <div class="help-icon  help-popup  float-right  pointer">
+                        <i class="help circle icon" data-content="Filler Content"></i>
+                    </div>                     
+                </span>
+
+
+                <dropdown placeholder="Week" :items="['Day', 'Week', 'Month']" class="store-heartbeat-interval"></dropdown>
+            </div>
+        </div>
+        <!-- END Card Header -->
+
+        <!-- Card Content -->
+        <div class="card-content  flexbox">
+            <div class="chart">
+                <highcharts :options="storeHeartbeatChart" ref="storeHeartbeatChart" class="store-heartbeat-card-chart"></highcharts>
+            </div>
+        </div>
+        <!-- END Card Content -->
+    </div>
+</script>

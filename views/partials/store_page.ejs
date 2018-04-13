@@ -1,0 +1,40 @@
+<div id="HeartBeat_View-Store" v-show="visible">
+    <div class="interactive-area">
+
+        <div class="store-title-container">
+            <div class="store-brand-logo" style="background-image: url('/dashboard/img/demo-graphics/default-logo-round.png');"></div>
+            <div class="store-details">
+                <span class="store-name">{{ storeName | storeName }}</span>
+                <span class="store-address">
+                    <span class="address">
+                        {{ storeName | address }}
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        <store-map :store-id="storeId" ref="storeMap"></store-map>
+        <store-heartbeat :store-id="storeId" ref="storeHeartbeat"></store-heartbeat>
+
+        <div class="flexbox  space-between">
+            <store-day-of-week :store-id="storeId" ref="dayOfWeekCard"></store-day-of-week>
+            <store-time-of-day :store-id="storeId" ref="timeOfDayCard"></time-of-day>
+        </div>
+
+
+        <div class="report-promos">
+            <div class="report cel">
+                <h3>Analyze Visitors Origin Points</h3>
+                <div class="label">Where do visitors live and work?</div>
+                <div class="ui button primary inverted">Generate CEL / CDL Study</div>
+            </div>
+
+            <div class="report pathing">
+                <h3>Analyze Visitors Origin Points</h3>
+                <div class="label">Where do visitors live and work?</div>
+                <div class="ui button primary inverted">Generate Pathing Study</div>
+            </div>            
+        </div>
+
+    </div>
+</div>

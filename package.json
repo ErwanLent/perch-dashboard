@@ -1,0 +1,24 @@
+{
+  "name": "Perch-Dashboard",
+  "version": "0.0.1",
+  "main": "app.js",
+  "dependencies": {
+    "action-controller": "^0.1.0",
+    "async": "^2.6.0",
+    "axios": "^0.18.0",
+    "basic-auth": "^2.0.0",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "cookie-parser": "^1.4.3",
+    "debug": "^3.1.0",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-content-length-validator": "^1.0.0",
+    "express-session": "^1.13.0",
+    "memory-cache": "^0.2.0",
+    "morgan": "^1.9.0",
+    "prompt": "^1.0.0",
+    "request": "^2.83.0",
+    "uuid": "^3.1.0"
+  }
+}

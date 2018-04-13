@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <title>Perch Truck</title>
+    <% include ../partials/head %>
+</head>
+<body id="perch-app">
+    <!--[if lt IE 7]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <% include ../partials/functions %> 
+    <% include ../partials/templates/AllTemplates %>
+
+    <!-- ==========================================================================
+       Load Dependencies
+     ========================================================================== */ -->
+
+    <script src="https://storage.googleapis.com/cdn.cintric.com/js/vendor/humanize.min.js"></script>
+    <script src="https://storage.googleapis.com/cdn.cintric.com/js/vendor/moment.min.js"></script>
+    <script src="https://storage.googleapis.com/cdn.cintric.com/js/vendor/fuse.min.js"></script>    
+
+    <script src="/js/vue/Colors.js"></script>
+    <script src="/js/vue/Global.js"></script>
+    <script src="/js/vue/VueExtensions.js"></script>
+
+
+    <!-- ==========================================================================
+       Load Components
+     ========================================================================== */ -->
+
+    <script src="/js/vue/components/general/LoadingOverlay.js"></script>
+    <script src="/js/vue/components/general/Dropdown.js"></script>
+    <script src="/js/vue/components/general/SwitchSlider.js"></script>
+    <script src="/js/vue/components/general/Checkbox.js"></script>
+    <script src="/js/vue/components/general/RadioButton.js"></script>
+    <script src="/js/vue/components/general/Modal.js"></script>
+    <script src="/js/vue/components/general/LightMap.js"></script>    
+    <script src="/js/vue/components/general/DateRangePicker.js"></script>
+    <script src="/js/vue/components/general/RangeSlider.js"></script>
+
+    <!-- ==========================================================================
+       Load HTML
+     ========================================================================== */ -->
+
+    <% include ../partials/container %>
+
+    <!-- ==========================================================================
+       Load Instances
+     ========================================================================== */ -->    
+    
+    <script src="/js/vue/instances/MainPage.js"></script>
+
+</body>
+</html>

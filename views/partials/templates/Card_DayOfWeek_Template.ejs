@@ -1,0 +1,24 @@
+<script type="text/x-template" id="card-day-of-week-template">
+    <div class="highlight-card  day-of-week-card  half">
+        <loading-overlay ref="loader"></loading-overlay>
+
+        <!-- Card Header -->
+        <div class="card-header  clearfix">
+            <div class="card-title">
+                Day of Week
+                <div class="help-icon  help-popup  float-right  pointer">
+                    <i class="help circle icon" data-content="filler content"></i>
+                </div>
+            </div>
+        </div>
+        <!-- END Card Header -->
+
+        <!-- Card Content -->
+        <div class="card-content">
+            <div class="chart  day-of-week-chart">
+                <highcharts :options="dayOfWeekChart" ref="dayOfWeekChart"  class="day-of-week-chart"></highcharts>
+            </div>
+        </div>
+        <!-- END Card Content -->
+    </div>
+</script>
