@@ -33,7 +33,6 @@ Vue.component('main-map', {
                 'minzoom': 15,
                 'paint': {
                     'fill-extrusion-color': '#aaa',
-
                     'fill-extrusion-height': [
                         "interpolate", ["linear"],
                         ["zoom"],
@@ -56,44 +55,6 @@ Vue.component('main-map', {
                 zoom: 16,
                 pitch: 60
             });
-        },
-        addTruckLogo: function(truckName, coordinates) {
-            let layerId = `${truckName.hashCode()}-truck-logo-layer`;
-
-            // Remove previous logo
-            if (this.map.getLayer(layerId)) {
-                this.map.removeLayer(layerId);
-            }      
-
-            if (this.map.getSource(layerId)) {
-                this.map.removeSource(layerId);
-            }  
-
-            const feature = {
-                'type': 'Feature',
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': coordinates
-                }
-            };
-
-            this.map.addSource(layerId, {
-                'type': 'geojson',
-                'data': {
-                    'type': 'FeatureCollection',
-                    'features': [feature]
-                }
-            });
-
-            this.map.addLayer({
-                'id': layerId,
-                'type': 'symbol',
-                'source': layerId,
-                'layout': {
-                    'icon-image': 'truck2',
-                    'icon-allow-overlap': true,
-                }
-            });            
         },
         getTrucksSchedule: function() {
             $.get(TruckScheduleEndpoint).done((response) => {
@@ -211,7 +172,7 @@ Vue.component('main-map', {
             this.addFullTruckRoute(truckName, routePath);
 
             // Animate route
-            this.animateRoute(truckName, allRouteIntermediaryPoints, 0);
+            this.animateRoute(truckName, allRouteIntermediaryPoints);
         },
         distanceBetweenCoordinates: function(firstLocation, secondLocation) {
             const firstPoint = this.generatePointFeature(firstLocation);
@@ -285,45 +246,73 @@ Vue.component('main-map', {
                 lon: calculatedLon
             };
         },
-        animateRoute: function(truckName, routePoints, pathIndex) {
-            if (pathIndex + 1 < routePoints.length) {
-                let currentPoint = [routePoints[pathIndex].lon, routePoints[pathIndex].lat];
-                let nextPoint = [routePoints[pathIndex + 1].lon, routePoints[pathIndex + 1].lat];
+        addTruckLogo: function(truckName, coordinates) {
+            let layerId = `${truckName.hashCode()}-truck-logo-layer`;
 
-                let routePath = [];
-                routePath.push(currentPoint);
-                routePath.push(nextPoint);
+            // Remove previous logo
+            if (this.map.getLayer(layerId)) {
+                this.map.removeLayer(layerId);
+            }      
 
-                let distanceToNextMarker =  this.distanceBetweenCoordinates(currentPoint, nextPoint);
-                let nextTimeout = distanceToNextMarker / 4;
+            if (this.map.getSource(layerId)) {
+                this.map.removeSource(layerId);
+            }  
 
-                this.addTruckLogo(truckName, nextPoint);
-
-                // Add route
-                // let animatedLine = L.polyline(routePath, {
-                //     color: '#3498db',
-                //     opacity: 1,
-                //     weight: 4
-                // }).addTo(map);
-
-                //this.animatedRouteLines.push(animatedLine);
-
-                if (nextTimeout < 1) {
-                    this.animateRoute(truckName, routePoints, pathIndex + 1);
-                    return;
+            const feature = {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': coordinates
                 }
+            };
 
-                setTimeout(() => {
-                    this.animateRoute(truckName, routePoints, pathIndex + 1);
-                }, nextTimeout)
-            } else {
-                setTimeout(function() {
-                    //clearAnimatedRoute();
-                    setTimeout(() => {
-                        this.animateRoute(truckName, routePoints, 0);
-                    }, 500);
-                }, 1000)
+            this.map.addSource(layerId, {
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': [feature]
+                }
+            });
+
+            this.map.addLayer({
+                'id': layerId,
+                'type': 'symbol',
+                'source': layerId,
+                'layout': {
+                    'icon-image': 'truck2',
+                    'icon-allow-overlap': true,
+                }
+            });            
+        },        
+        animateRoute: function(truckName, routePoints) {
+            console.log(routePoints.length);
+            route = routePoints;
+            truckLayerId = `${truckName.hashCode()}-truck-logo-layer`;
+
+            this.addTruckLogo(truckName, [routePoints[0].lon, routePoints[0].lat]);
+
+            let source = this.map.getSource(truckLayerId);
+
+            this.animateLogo();
+        },
+        animateLogo: function(timestamp) {
+            if (counter >= route.length) {
+                return;
             }
+
+            let source = this.map.getSource(truckLayerId);
+            source._data.features[0].geometry.coordinates = [route[counter].lon, route[counter].lat];
+
+            counter++;
+
+            // Update the source with this new data.
+            this.map.getSource(truckLayerId).setData(source._data);
+
+            requestAnimationFrame(this.animateLogo);
         }
     }
 });
+
+let counter = 1;
+let route;
+let truckLayerId;
