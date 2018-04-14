@@ -2,7 +2,8 @@ Vue.component('main-map', {
     template: '#main-map-template',
     data: function() {
         return {
-            map: null
+            map: null,
+            trucks: []
         };
     },
     methods: {
@@ -10,16 +11,16 @@ Vue.component('main-map', {
             this.map = this.$refs.lightmap.map;
             this.add3dBuildings();
             this.addTruckLogo();
+
+            this.getTrucksSchedule();
         },
         add3dBuildings: function() {
-            const layers = this.map.getStyle().layers;
-
             let labelLayerId;
-            for (let i = 0; i < layers.length; i++) {
-                if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
-                    labelLayerId = layers[i].id;
+            for (let layer of this.map.getStyle().layers) {
+                if (layer.type === 'symbol' && layer.layout['text-field']) {
+                    labelLayerId = layer.id;
                     break;
-                }
+                }                
             }
 
             this.map.addLayer({
@@ -88,6 +89,38 @@ Vue.component('main-map', {
                     'icon-allow-overlap': true,
                 }
             });            
+        },
+        getTrucksSchedule: function() {
+            $.get(TruckScheduleEndpoint).done((response) => {
+                if (!response.trucks || response.trucks.length <= 0) {
+                    console.log(response);
+                    alert('Error loading trucks.');
+                    return;
+                }
+
+                this.trucks = response.trucks;
+                this.updateTrucks();
+            });
+        },
+        updateTrucks: function() {
+            if (this.trucks.length <= 0) {
+                return;
+            }
+
+            const currentTime = Date.time();
+            for (const truck of this.trucks) {
+                for (const stop of truck.stops) {
+                    if (currentTime < stop.arrival) {
+                        console.log(`${truck.title} is in transit`);
+                        break;
+                    }
+
+                    if (currentTime < stop.departure) {
+                        console.log(`${truck.title} is stopped`);
+                        break;
+                    }                    
+                }
+            }
         }
     }
 });
