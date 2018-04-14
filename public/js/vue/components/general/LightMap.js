@@ -15,8 +15,8 @@ Vue.component('light-map', {
         this.map = new mapboxgl.Map({
             container: this.$vnode.elm,
             style: LightMapStyleUrl,
-            center: [-118.4863192, 34.0196254],
-            zoom: 13
+            center: [-98.9987099, 39.9930193],
+            zoom: 3
         });
 
         // setTimeout(() => this.onMapLoad(), 100);

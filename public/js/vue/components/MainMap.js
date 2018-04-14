@@ -3,13 +3,14 @@ Vue.component('main-map', {
     data: function() {
         return {
             map: null,
-            trucks: []
+            trucks: [],
+            bounds: []
         };
     },
     methods: {
         load: function() {
             this.map = this.$refs.lightmap.map;
-            
+
             this.add3dBuildings();
             this.getTrucksSchedule();
         },
@@ -106,21 +107,37 @@ Vue.component('main-map', {
                 return;
             }
 
+            this.bounds = [];
+
             const currentTime = Date.time();
             for (const truck of this.trucks) {
                 for (const stop of truck.stops) {
                     if (currentTime < stop.arrival) {
                         console.log(`${truck.title} is in transit`);
+                        this.bounds.push([stop.lon, stop.lat]);
                         break;
                     }
 
                     if (currentTime < stop.departure) {
                         console.log(`${truck.title} is stopped`);
+
+                        this.bounds.push([stop.lon, stop.lat]);
                         this.addTruckLogo(truck.title, [stop.lon, stop.lat]);
                         break;
                     }                    
                 }
             }
+        
+            this.fitBounds();
+        },
+        fitBounds: function() {
+            const bounds = new mapboxgl.LngLatBounds();
+
+            for (const bound of this.bounds) {
+                bounds.extend(new mapboxgl.LngLat(bound[0], bound[1]));    
+            }
+
+            this.map.fitBounds(bounds, { padding: 100 });            
         }
     }
 });
