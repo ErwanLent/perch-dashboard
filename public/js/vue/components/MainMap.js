@@ -4,7 +4,8 @@ Vue.component('main-map', {
         return {
             map: null,
             trucks: [],
-            bounds: []
+            bounds: [],
+            animatedRouteLines: []
         };
     },
     methods: {
@@ -61,8 +62,12 @@ Vue.component('main-map', {
 
             // Remove previous logo
             if (this.map.getLayer(layerId)) {
-                // remove logo here
-            }
+                this.map.removeLayer(layerId);
+            }      
+
+            if (this.map.getSource(layerId)) {
+                this.map.removeSource(layerId);
+            }  
 
             const feature = {
                 'type': 'Feature',
@@ -199,14 +204,14 @@ Vue.component('main-map', {
                     const numOfPointsOnLineAmount = Math.ceil((distanceOfLine * (routePlotAmount / route.distance)));
                     const pointsToPlot = this.getIntermediatePointsOnLine(lineStartLocation, lineEndLocation, numOfPointsOnLineAmount);
 
-                    // allRouteIntermediaryPoints.push.apply(allRouteIntermediaryPoints, pointsToPlot);
+                    allRouteIntermediaryPoints.push.apply(allRouteIntermediaryPoints, pointsToPlot);
                 }
             }
 
             this.addFullTruckRoute(truckName, routePath);
 
             // Animate route
-            //animateRoute(allRouteIntermediaryPoints, 0);
+            this.animateRoute(truckName, allRouteIntermediaryPoints, 0);
         },
         distanceBetweenCoordinates: function(firstLocation, secondLocation) {
             const firstPoint = this.generatePointFeature(firstLocation);
@@ -227,6 +232,14 @@ Vue.component('main-map', {
         },
         addFullTruckRoute: function(truckName, coordinates) {
             let layerId = `${truckName.hashCode()}-truck-full-route-layer`;
+
+            if (this.map.getLayer(layerId)) {
+                this.map.removeLayer(layerId);
+            }       
+
+            if (this.map.getSource(layerId)) {
+                this.map.removeSource(layerId);
+            }                  
 
             this.map.addLayer({
                 "id": layerId,
@@ -271,6 +284,46 @@ Vue.component('main-map', {
                 lat: calculatedLat,
                 lon: calculatedLon
             };
+        },
+        animateRoute: function(truckName, routePoints, pathIndex) {
+            if (pathIndex + 1 < routePoints.length) {
+                let currentPoint = [routePoints[pathIndex].lon, routePoints[pathIndex].lat];
+                let nextPoint = [routePoints[pathIndex + 1].lon, routePoints[pathIndex + 1].lat];
+
+                let routePath = [];
+                routePath.push(currentPoint);
+                routePath.push(nextPoint);
+
+                let distanceToNextMarker =  this.distanceBetweenCoordinates(currentPoint, nextPoint);
+                let nextTimeout = distanceToNextMarker / 4;
+
+                this.addTruckLogo(truckName, nextPoint);
+
+                // Add route
+                // let animatedLine = L.polyline(routePath, {
+                //     color: '#3498db',
+                //     opacity: 1,
+                //     weight: 4
+                // }).addTo(map);
+
+                //this.animatedRouteLines.push(animatedLine);
+
+                if (nextTimeout < 1) {
+                    this.animateRoute(truckName, routePoints, pathIndex + 1);
+                    return;
+                }
+
+                setTimeout(() => {
+                    this.animateRoute(truckName, routePoints, pathIndex + 1);
+                }, nextTimeout)
+            } else {
+                setTimeout(function() {
+                    //clearAnimatedRoute();
+                    setTimeout(() => {
+                        this.animateRoute(truckName, routePoints, 0);
+                    }, 500);
+                }, 1000)
+            }
         }
     }
 });
