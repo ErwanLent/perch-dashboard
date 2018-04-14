@@ -9,9 +9,8 @@ Vue.component('main-map', {
     methods: {
         load: function() {
             this.map = this.$refs.lightmap.map;
+            
             this.add3dBuildings();
-            this.addTruckLogo();
-
             this.getTrucksSchedule();
         },
         add3dBuildings: function() {
@@ -56,8 +55,8 @@ Vue.component('main-map', {
                 pitch: 60
             });
         },
-        addTruckLogo: function() {
-            let layerId = `truck-logo-layer`;
+        addTruckLogo: function(truckName, coordinates) {
+            let layerId = `${truckName.hashCode()}-truck-logo-layer`;
 
             // Remove previous logo
             if (this.map.getLayer(layerId)) {
@@ -68,7 +67,7 @@ Vue.component('main-map', {
                 'type': 'Feature',
                 'geometry': {
                     'type': 'Point',
-                    'coordinates': [-118.491968, 34.010589]
+                    'coordinates': coordinates
                 }
             };
 
@@ -117,6 +116,7 @@ Vue.component('main-map', {
 
                     if (currentTime < stop.departure) {
                         console.log(`${truck.title} is stopped`);
+                        this.addTruckLogo(truck.title, [stop.lon, stop.lat]);
                         break;
                     }                    
                 }
