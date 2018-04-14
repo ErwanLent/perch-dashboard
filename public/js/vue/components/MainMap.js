@@ -109,12 +109,23 @@ Vue.component('main-map', {
 
             this.bounds = [];
 
+            let didAlready = false;
+
             const currentTime = Date.time();
             for (const truck of this.trucks) {
-                for (const stop of truck.stops) {
+                for (const [index, stop] of truck.stops.entries()) {
                     if (currentTime < stop.arrival) {
                         console.log(`${truck.title} is in transit`);
+
+                        const nextStop = truck.stops[index + 1];
+
+                        if (didAlready) {
+                            break;
+                        }
+
                         this.bounds.push([stop.lon, stop.lat]);
+                        this.addMovingTruck(truck.title, [stop.lon, stop.lat], [nextStop.lon, nextStop.lat]);
+                        didAlready = true;
                         break;
                     }
 
@@ -140,7 +151,28 @@ Vue.component('main-map', {
             this.map.fitBounds(bounds, { padding: 100 });            
         },
         addMovingTruck: function(truckName, startLocation, endLocation) {
+            this.getRoute(startLocation, endLocation, (route) => {
+                console.log(route);
+            });
+        },
+        getRoute: function(startLocation, endLocation, callback) {
+            const routeUrl = DirectionsBaseUrl + `${startLocation[0]},${startLocation[1]};${endLocation[0]},${endLocation[1]}?access_token=${mapboxgl.accessToken}`;
+            
+            $.get(routeUrl, (response) => {
+                // Response validation
+                if (response.code != "Ok") {
+                    callback();
+                    return;
+                }
 
+                const route = {
+                    duration: response.routes[0].duration,
+                    distance: response.routes[0].distance,
+                    decodedPolyline: polyline.decode(response.routes[0].geometry)
+                };
+
+                callback(route);
+            });
         }
     }
 });
