@@ -138,6 +138,9 @@ Vue.component('main-map', {
             }
 
             this.map.fitBounds(bounds, { padding: 100 });            
+        },
+        addMovingTruck: function(truckName, startLocation, endLocation) {
+
         }
     }
 });
