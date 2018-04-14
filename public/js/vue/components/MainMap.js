@@ -140,47 +140,7 @@ Vue.component('main-map', {
 
                 callback(route);
             });
-        },
-        plotRoute: function(truckName, route) {
-            let routePath = [];
-            let allRouteIntermediaryPoints = [];
-
-            const routePlotAmount = route.distance / 40;
-
-            for (let i = 0; i < route.decodedPolyline.length; i++) {
-                routePath.push([route.decodedPolyline[i][1], route.decodedPolyline[i][0]]);
-
-                if (i + 1 < route.decodedPolyline.length) {
-                    const lineStartLocation = {
-                        lat: route.decodedPolyline[i][0],
-                        lon: route.decodedPolyline[i][1]
-                    };
-
-                    const lineEndLocation = {
-                        lat: route.decodedPolyline[i + 1][0],
-                        lon: route.decodedPolyline[i + 1][1]
-                    };
-
-                    const distanceOfLine = this.distanceBetweenCoordinates([lineStartLocation.lon, lineStartLocation.lat], [lineEndLocation.lon, lineEndLocation.lat]);
-                    const numOfPointsOnLineAmount = Math.ceil((distanceOfLine * (routePlotAmount / route.distance)));
-                    const pointsToPlot = this.getIntermediatePointsOnLine(lineStartLocation, lineEndLocation, numOfPointsOnLineAmount);
-
-                    allRouteIntermediaryPoints.push.apply(allRouteIntermediaryPoints, pointsToPlot);
-                }
-            }
-
-            this.addFullTruckRoute(truckName, routePath);
-
-            // Animate route
-            this.animateRoute(truckName, allRouteIntermediaryPoints);
-        },
-        distanceBetweenCoordinates: function(firstLocation, secondLocation) {
-            const firstPoint = this.generatePointFeature(firstLocation);
-            const secondPoint = this.generatePointFeature(secondLocation);
-            const units = "kilometers";
-
-            return turf.distance(firstPoint, secondPoint, units) * 1000;
-        },
+        },     
         generatePointFeature: function(coordinates) {
             return {
                 "type": "Feature",
@@ -226,26 +186,6 @@ Vue.component('main-map', {
                 }
             });
         },
-        getIntermediatePointsOnLine: function(lineStartLocation, lineEndLocation, numOfPointsOnLineAmount) {
-            const intermediatePoints = [];
-            intermediatePoints.push(lineStartLocation);
-
-            for (let i = 0; i <= numOfPointsOnLineAmount; i++) {
-                const calculatedLocation = this.calculatePointOnLine(intermediatePoints[intermediatePoints.length - 1], lineEndLocation, i, numOfPointsOnLineAmount);
-                intermediatePoints.push(calculatedLocation);
-            }
-
-            return intermediatePoints;
-        },
-        calculatePointOnLine: function(lineStartLocation, lineEndLocation, k, numOfPointsOnLineAmount) {
-            const calculatedLat = (k * ((lineEndLocation.lat - lineStartLocation.lat) / numOfPointsOnLineAmount)) + lineStartLocation.lat;
-            const calculatedLon = (k * ((lineEndLocation.lon - lineStartLocation.lon) / numOfPointsOnLineAmount)) + lineStartLocation.lon;
-
-            return {
-                lat: calculatedLat,
-                lon: calculatedLon
-            };
-        },
         addTruckLogo: function(truckName, coordinates) {
             let layerId = `${truckName.hashCode()}-truck-logo-layer`;
 
@@ -283,27 +223,151 @@ Vue.component('main-map', {
                     'icon-allow-overlap': true,
                 }
             });            
-        },        
+        },      
+        addCircle: function(coordinates) {
+            let layerId = uuid();
+
+            // Remove previous logo
+            if (this.map.getLayer(layerId)) {
+                this.map.removeLayer(layerId);
+            }
+
+            if (this.map.getSource(layerId)) {
+                this.map.removeSource(layerId);
+            }
+
+            const feature = {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': coordinates
+                }
+            };
+
+            this.map.addSource(layerId, {
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': [feature]
+                }
+            });
+
+            this.map.addLayer({
+                'id': layerId,
+                'type': 'circle',
+                'source': layerId,
+                'layout': {
+                    'visibility': 'visible'
+                },
+                'paint': {
+                    "circle-color": storeMapMarkerColor,
+                    "circle-opacity": 1,
+                    "circle-stroke-width": 1,
+                    "circle-stroke-color": storeMapMarkerOutlineColor
+                }                
+            });
+        },
+       plotRoute: function(truckName, route) {
+            let routePath = [];
+            let allRouteIntermediaryPoints = [];
+
+            const routePlotAmount = route.distance / 30;
+
+            distance = route.distance;
+
+            for (let i = 0; i < route.decodedPolyline.length; i++) {
+                routePath.push([route.decodedPolyline[i][1], route.decodedPolyline[i][0]]);
+
+                if (i + 1 < route.decodedPolyline.length) {
+                    const lineStartLocation = {
+                        lat: route.decodedPolyline[i][0],
+                        lon: route.decodedPolyline[i][1]
+                    };
+
+                    const lineEndLocation = {
+                        lat: route.decodedPolyline[i + 1][0],
+                        lon: route.decodedPolyline[i + 1][1]
+                    };
+
+                    const distanceOfLine = this.distanceBetweenCoordinates([lineStartLocation.lon, lineStartLocation.lat], [lineEndLocation.lon, lineEndLocation.lat]);
+                    const numOfPointsOnLineAmount = Math.ceil((distanceOfLine * (routePlotAmount / route.distance)));
+                    const pointsToPlot = this.getIntermediatePointsOnLine(lineStartLocation, lineEndLocation, numOfPointsOnLineAmount);
+
+                    allRouteIntermediaryPoints.push.apply(allRouteIntermediaryPoints, pointsToPlot);
+                }
+            }
+
+            this.addFullTruckRoute(truckName, routePath);
+
+            // Animate route
+            this.animateRoute(truckName, allRouteIntermediaryPoints);
+        },
+        distanceBetweenCoordinates: function(firstLocation, secondLocation) {
+            const firstPoint = this.generatePointFeature(firstLocation);
+            const secondPoint = this.generatePointFeature(secondLocation);
+            const units = "kilometers";
+
+            return turf.distance(firstPoint, secondPoint, units) * 1000;
+        },
+        getIntermediatePointsOnLine: function(lineStartLocation, lineEndLocation, numOfPointsOnLineAmount) {
+            const intermediatePoints = [];
+            intermediatePoints.push(lineStartLocation);
+
+            for (let i = 0; i <= numOfPointsOnLineAmount; i++) {
+                const calculatedLocation = this.calculatePointOnLine(intermediatePoints[intermediatePoints.length - 1], lineEndLocation, i, numOfPointsOnLineAmount);
+                intermediatePoints.push(calculatedLocation);
+            }
+
+            return intermediatePoints;
+        },
+        calculatePointOnLine: function(lineStartLocation, lineEndLocation, k, numOfPointsOnLineAmount) {
+            const calculatedLat = (k * ((lineEndLocation.lat - lineStartLocation.lat) / numOfPointsOnLineAmount)) + lineStartLocation.lat;
+            const calculatedLon = (k * ((lineEndLocation.lon - lineStartLocation.lon) / numOfPointsOnLineAmount)) + lineStartLocation.lon;
+
+            return {
+                lat: calculatedLat,
+                lon: calculatedLon
+            };
+        },           
         animateRoute: function(truckName, routePoints) {
-            console.log(routePoints.length);
             route = routePoints;
+
+            // for (const coords of routePoints) {
+            //     this.addCircle([coords.lon,coords.lat]);
+            // }
+
+            this.addCircle(routePoints[0]);
+
             truckLayerId = `${truckName.hashCode()}-truck-logo-layer`;
 
             this.addTruckLogo(truckName, [routePoints[0].lon, routePoints[0].lat]);
 
             let source = this.map.getSource(truckLayerId);
+            console.log(route.length);
 
-            this.animateLogo();
+            setTimeout(() =>  this.animateLogo(0), 5000);
         },
         animateLogo: function(timestamp) {
             if (counter >= route.length) {
                 return;
             }
 
-            let source = this.map.getSource(truckLayerId);
-            source._data.features[0].geometry.coordinates = [route[counter].lon, route[counter].lat];
+            if (timestamp == 0) {
+                startTimestamp = timestamp;
+            }
 
-            counter++;
+            let endTimestamp = startTimestamp + (distance * 6);
+            let progress = (timestamp - startTimestamp) / (endTimestamp - startTimestamp);
+            let index = Math.round(progress * route.length);
+
+            console.log(index);
+
+            if (index >= route.length) {
+                return;
+            }
+
+            let source = this.map.getSource(truckLayerId);
+            source._data.features[0].geometry.coordinates = [route[index].lon, route[index].lat];
 
             // Update the source with this new data.
             this.map.getSource(truckLayerId).setData(source._data);
@@ -316,3 +380,5 @@ Vue.component('main-map', {
 let counter = 1;
 let route;
 let truckLayerId;
+let startTimestamp = 0;
+let distance = 0;
