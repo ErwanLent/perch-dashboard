@@ -179,25 +179,25 @@ Vue.component('main-map', {
             let routePath = [];
             let allRouteIntermediaryPoints = [];
 
-            routePlotAmount = route.distance / 40;
+            const routePlotAmount = route.distance / 40;
 
             for (let i = 0; i < route.decodedPolyline.length; i++) {
                 routePath.push([route.decodedPolyline[i][1], route.decodedPolyline[i][0]]);
 
                 if (i + 1 < route.decodedPolyline.length) {
-                    let lineStartLocation = {
+                    const lineStartLocation = {
                         lat: route.decodedPolyline[i][0],
                         lon: route.decodedPolyline[i][1]
                     };
 
-                    let lineEndLocation = {
+                    const lineEndLocation = {
                         lat: route.decodedPolyline[i + 1][0],
                         lon: route.decodedPolyline[i + 1][1]
                     };
 
-                    let distanceOfLine = this.distanceBetweenCoordinates([lineStartLocation.lon, lineStartLocation.lat], [lineEndLocation.lon, lineEndLocation.lat]);
-                    // let numOfPointsOnLineAmount = Math.ceil((distanceOfLine * (routePlotAmount / route.distance)));
-                    // let pointsToPlot = getIntermediatePointsOnLine(lineStartLocation, lineEndLocation, numOfPointsOnLineAmount);
+                    const distanceOfLine = this.distanceBetweenCoordinates([lineStartLocation.lon, lineStartLocation.lat], [lineEndLocation.lon, lineEndLocation.lat]);
+                    const numOfPointsOnLineAmount = Math.ceil((distanceOfLine * (routePlotAmount / route.distance)));
+                    const pointsToPlot = this.getIntermediatePointsOnLine(lineStartLocation, lineEndLocation, numOfPointsOnLineAmount);
 
                     // allRouteIntermediaryPoints.push.apply(allRouteIntermediaryPoints, pointsToPlot);
                 }
@@ -251,6 +251,26 @@ Vue.component('main-map', {
                     "line-width": 8
                 }
             });
+        },
+        getIntermediatePointsOnLine: function(lineStartLocation, lineEndLocation, numOfPointsOnLineAmount) {
+            const intermediatePoints = [];
+            intermediatePoints.push(lineStartLocation);
+
+            for (let i = 0; i <= numOfPointsOnLineAmount; i++) {
+                const calculatedLocation = this.calculatePointOnLine(intermediatePoints[intermediatePoints.length - 1], lineEndLocation, i, numOfPointsOnLineAmount);
+                intermediatePoints.push(calculatedLocation);
+            }
+
+            return intermediatePoints;
+        },
+        calculatePointOnLine: function(lineStartLocation, lineEndLocation, k, numOfPointsOnLineAmount) {
+            const calculatedLat = (k * ((lineEndLocation.lat - lineStartLocation.lat) / numOfPointsOnLineAmount)) + lineStartLocation.lat;
+            const calculatedLon = (k * ((lineEndLocation.lon - lineStartLocation.lon) / numOfPointsOnLineAmount)) + lineStartLocation.lon;
+
+            return {
+                lat: calculatedLat,
+                lon: calculatedLon
+            };
         }
     }
 });
