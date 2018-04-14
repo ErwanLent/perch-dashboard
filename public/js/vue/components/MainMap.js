@@ -345,22 +345,24 @@ Vue.component('main-map', {
             let source = this.map.getSource(truckLayerId);
             console.log(route.length);
 
-            setTimeout(() =>  this.animateLogo(0), 5000);
+            setTimeout(() =>  this.animateLogo(), 5000);
         },
         animateLogo: function(timestamp) {
             if (counter >= route.length) {
                 return;
             }
 
-            if (timestamp == 0) {
+            if (timestamp != undefined && startTimestamp == 0) {
                 startTimestamp = timestamp;
             }
 
-            let endTimestamp = startTimestamp + (distance * 6);
+            let endTimestamp = startTimestamp + (distance * 5);
             let progress = (timestamp - startTimestamp) / (endTimestamp - startTimestamp);
             let index = Math.round(progress * route.length);
 
-            console.log(index);
+            if (timestamp == undefined) {
+                index = 1;
+            }
 
             if (index >= route.length) {
                 return;
