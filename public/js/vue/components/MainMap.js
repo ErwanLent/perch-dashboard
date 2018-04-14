@@ -153,7 +153,7 @@ Vue.component('main-map', {
         addMovingTruck: function(truckName, startLocation, endLocation) {
             this.getRoute(startLocation, endLocation, (route) => {
                 console.log(route);
-                this.plotRoute(route);
+                this.plotRoute(truckName, route);
             });
         },
         getRoute: function(startLocation, endLocation, callback) {
@@ -175,7 +175,7 @@ Vue.component('main-map', {
                 callback(route);
             });
         },
-        plotRoute: function(route) {
+        plotRoute: function(truckName, route) {
             let routePath = [];
             let allRouteIntermediaryPoints = [];
 
@@ -196,13 +196,14 @@ Vue.component('main-map', {
                     };
 
                     let distanceOfLine = this.distanceBetweenCoordinates([lineStartLocation.lon, lineStartLocation.lat], [lineEndLocation.lon, lineEndLocation.lat]);
-                    console.log(distanceOfLine);
                     // let numOfPointsOnLineAmount = Math.ceil((distanceOfLine * (routePlotAmount / route.distance)));
                     // let pointsToPlot = getIntermediatePointsOnLine(lineStartLocation, lineEndLocation, numOfPointsOnLineAmount);
 
                     // allRouteIntermediaryPoints.push.apply(allRouteIntermediaryPoints, pointsToPlot);
                 }
             }
+
+            this.addFullTruckRoute(truckName, routePath);
 
             // Animate route
             //animateRoute(allRouteIntermediaryPoints, 0);
@@ -223,6 +224,33 @@ Vue.component('main-map', {
                     "coordinates": coordinates
                 }
             };
+        },
+        addFullTruckRoute: function(truckName, coordinates) {
+            let layerId = `${truckName.hashCode()}-truck-full-route-layer`;
+
+            this.map.addLayer({
+                "id": layerId,
+                "type": "line",
+                "source": {
+                    "type": "geojson",
+                    "data": {
+                        "type": "Feature",
+                        "properties": {},
+                        "geometry": {
+                            "type": "LineString",
+                            "coordinates": coordinates
+                        }
+                    }
+                },
+                "layout": {
+                    "line-join": "round",
+                    "line-cap": "round"
+                },
+                "paint": {
+                    "line-color": "#888",
+                    "line-width": 8
+                }
+            });
         }
     }
 });
