@@ -9,6 +9,7 @@ Vue.component('main-map', {
         load: function() {
             this.map = this.$refs.lightmap.map;
             this.add3dBuildings();
+            this.addTruckLogo();
         },
         add3dBuildings: function() {
             const layers = this.map.getStyle().layers;
@@ -53,6 +54,40 @@ Vue.component('main-map', {
                 zoom: 16,
                 pitch: 60
             });
+        },
+        addTruckLogo: function() {
+            let layerId = `truck-logo-layer`;
+
+            // Remove previous logo
+            if (this.map.getLayer(layerId)) {
+                // remove logo here
+            }
+
+            const feature = {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-118.491968, 34.010589]
+                }
+            };
+
+            this.map.addSource(layerId, {
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': [feature]
+                }
+            });
+
+            this.map.addLayer({
+                'id': layerId,
+                'type': 'symbol',
+                'source': layerId,
+                'layout': {
+                    'icon-image': 'truck2',
+                    'icon-allow-overlap': true,
+                }
+            });            
         }
     }
 });
