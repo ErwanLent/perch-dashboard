@@ -153,6 +153,7 @@ Vue.component('main-map', {
         addMovingTruck: function(truckName, startLocation, endLocation) {
             this.getRoute(startLocation, endLocation, (route) => {
                 console.log(route);
+                this.plotRoute(route);
             });
         },
         getRoute: function(startLocation, endLocation, callback) {
@@ -173,6 +174,55 @@ Vue.component('main-map', {
 
                 callback(route);
             });
+        },
+        plotRoute: function(route) {
+            let routePath = [];
+            let allRouteIntermediaryPoints = [];
+
+            routePlotAmount = route.distance / 40;
+
+            for (let i = 0; i < route.decodedPolyline.length; i++) {
+                routePath.push([route.decodedPolyline[i][1], route.decodedPolyline[i][0]]);
+
+                if (i + 1 < route.decodedPolyline.length) {
+                    let lineStartLocation = {
+                        lat: route.decodedPolyline[i][0],
+                        lon: route.decodedPolyline[i][1]
+                    };
+
+                    let lineEndLocation = {
+                        lat: route.decodedPolyline[i + 1][0],
+                        lon: route.decodedPolyline[i + 1][1]
+                    };
+
+                    let distanceOfLine = this.distanceBetweenCoordinates([lineStartLocation.lon, lineStartLocation.lat], [lineEndLocation.lon, lineEndLocation.lat]);
+                    console.log(distanceOfLine);
+                    // let numOfPointsOnLineAmount = Math.ceil((distanceOfLine * (routePlotAmount / route.distance)));
+                    // let pointsToPlot = getIntermediatePointsOnLine(lineStartLocation, lineEndLocation, numOfPointsOnLineAmount);
+
+                    // allRouteIntermediaryPoints.push.apply(allRouteIntermediaryPoints, pointsToPlot);
+                }
+            }
+
+            // Animate route
+            //animateRoute(allRouteIntermediaryPoints, 0);
+        },
+        distanceBetweenCoordinates: function(firstLocation, secondLocation) {
+            const firstPoint = this.generatePointFeature(firstLocation);
+            const secondPoint = this.generatePointFeature(secondLocation);
+            const units = "kilometers";
+
+            return turf.distance(firstPoint, secondPoint, units) * 1000;
+        },
+        generatePointFeature: function(coordinates) {
+            return {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": coordinates
+                }
+            };
         }
     }
 });
