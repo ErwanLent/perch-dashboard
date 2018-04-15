@@ -275,3 +275,36 @@
     background-size: contain;
     background-repeat: no-repeat;	
 }
+
+.truck-popup .tabs-container .menu {
+    font-size: 12px;
+    width: 160px;
+    margin: auto;
+    border-color: #65C97A;    
+}
+
+.truck-popup .tabs-container .menu .active,
+.truck-popup .tabs-container .menu .active:hover {
+	background-color: #65C97A;
+    color: white;
+}
+
+.truck-popup .tabs-container .ui.menu .item:before {
+	display: none;
+}
+
+.truck-popup .tabs-container .menu .item {
+	cursor: pointer;
+}
+
+.truck-popup .tabs-container {
+	margin-left: 67px;
+	margin-top: 19px;	
+}
+
+.inventory .header {
+	font-size: 23px;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-top: 20px;
+}
