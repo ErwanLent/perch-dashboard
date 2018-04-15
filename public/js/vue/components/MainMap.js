@@ -4,6 +4,7 @@ Vue.component('main-map', {
         return {
             map: null,
             trucks: trucks,
+            truckLocations: {},
             bounds: [],
             animatedRouteLines: []
         };
@@ -14,6 +15,12 @@ Vue.component('main-map', {
 
             this.add3dBuildings();
             this.getTrucksSchedule();
+
+            EventBus.$on("newSelectedTruck", truck => {
+                if (this.truckLocations[truck.title]) {
+                    this.zoomIn(this.truckLocations[truck.title].lat, this.truckLocations[truck.title].lon);    
+                }
+            });
         },
         add3dBuildings: function() {
             let labelLayerId;
@@ -102,12 +109,14 @@ Vue.component('main-map', {
 
                         this.bounds.push([stop.lon, stop.lat]);
                         this.addTruckLogo(truck.title, [stop.lon, stop.lat]);
+                        this.truckLocations[truck.title] = {lat: stop.lat, lon: stop.lon};
+
                         break;
                     }                    
                 }
             }
         
-            //this.fitBounds();
+            this.fitBounds();
         },
         fitBounds: function() {
             const bounds = new mapboxgl.LngLatBounds();
