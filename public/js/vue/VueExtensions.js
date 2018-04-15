@@ -208,28 +208,6 @@ Date.time = function() {
     return new Date().getUnixTime();
 }
 
-function getActiveLocations() {
-	const activeLocations = [];
-	for (const location of Object.keys(State.filters.locations)) {
-		if (State.filters.locations[location].isChecked) {
-			activeLocations.push(location);
-		}
-	}
-
-	return activeLocations;
-}
-
-function getActiveLocationStockTickers() {
-	const activeLocations = {};
-	for (const location of Object.keys(State.filters.locations)) {
-		if (State.filters.locations[location].isChecked) {
-			activeLocations[location] = Chains[location].stockTicker;
-		}
-	}
-
-	return activeLocations;	
-}
-
 function stopRequest(request) {
 	try {
 		if (request) {
