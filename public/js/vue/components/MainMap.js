@@ -3,7 +3,7 @@ Vue.component('main-map', {
     data: function() {
         return {
             map: null,
-            trucks: [],
+            trucks: trucks,
             bounds: [],
             animatedRouteLines: []
         };
@@ -57,16 +57,18 @@ Vue.component('main-map', {
             });
         },
         getTrucksSchedule: function() {
-            $.get(TruckScheduleEndpoint).done((response) => {
-                if (!response.trucks || response.trucks.length <= 0) {
-                    console.log(response);
-                    alert('Error loading trucks.');
-                    return;
-                }
+            // $.get(TruckScheduleEndpoint).done((response) => {
+            //     if (!response.trucks || response.trucks.length <= 0) {
+            //         console.log(response);
+            //         alert('Error loading trucks.');
+            //         return;
+            //     }
 
-                this.trucks = response.trucks;
-                this.updateTrucks();
-            });
+            //     this.trucks = response.trucks;
+            //     this.updateTrucks();
+            // });
+
+            this.updateTrucks();
         },
         updateTrucks: function() {
             if (this.trucks.length <= 0) {

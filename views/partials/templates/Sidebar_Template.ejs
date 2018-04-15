@@ -7,5 +7,17 @@
 
             <highcharts :options="performanceChart" ref="performanceChart" class="performance-chart"></highcharts>
         </div>
+
+        <div class="truck-list">
+            <div class="truck-card" v-for="truck in trucks">
+                <div class="button ui primary tiny">View</div>
+                <div class="title">
+                    {{ truck.title }}
+                </div>
+                <div class="revenue">
+                    Revenue Today: ${{ truck.revenue | number }}
+                </div>
+            </div>
+        </div>
     </div>
 </script>

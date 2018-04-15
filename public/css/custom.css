@@ -138,4 +138,59 @@
 	height: 150px;
 }
 
-/*65C97A*/
+.green {
+	color: #65C97A;	
+}
+
+.truck-list .truck-card .title {
+	display: inline-block;
+}
+
+.truck-list .truck-card .button {
+	display: inline-block;
+}
+
+.truck-card {
+    background-color: white;
+    -webkit-box-shadow: 0 0 14px 0 #E4ECEF;
+    -moz-box-shadow: 0 0 14px 0 #E4ECEF;
+    box-shadow: 0 0 14px 0 #E4ECEF;
+    -webkit-box-shadow: 1px solid rgba(228, 236, 239, 0.78);
+    -moz-box-shadow: 1px solid rgba(228, 236, 239, 0.78);
+    box-shadow: 1px solid rgba(228, 236, 239, 0.78);
+    padding: 15px;
+    margin: 20px 15px;	
+}
+
+.truck-card .button {
+	float: right;
+}
+
+.truck-list {
+	overflow-y: scroll;
+    height: 365px;
+}
+
+.truck-card .revenue {
+	display: block;
+}
+
+.button.ui.primary {
+	background-color: #65C97A !important;
+}
+
+.truck-card .title {
+	font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.truck-card .revenue {
+	font-size: 12px;
+    font-weight: bold;
+    margin-top: -12px;
+}
+
+.truck-card .ui.button {
+	margin-top: 11px;
+}

@@ -1,11 +1,11 @@
-const BrandPageInstance = new Vue({
+const MainPageInstance = new Vue({
 	el: '#MainPage',
 	data: {
 		visible: true,
 		components: []
 	},
 	mounted: function() {
-		this.load();
+		// this.load();
 	},
 	methods: {
 		showAllLoaders: function() {

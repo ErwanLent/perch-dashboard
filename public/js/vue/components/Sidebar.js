@@ -2,6 +2,7 @@ Vue.component('sidebar', {
     template: '#sidebar-template',
     data: function() {
         return {
+            trucks: trucks,
             todaysRevenue: 6013,
             performanceChart: {}
         };
