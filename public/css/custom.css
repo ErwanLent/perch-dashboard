@@ -34,9 +34,9 @@
 
 .navbar .user-thumbnail {
     background-image: url(https://0.gravatar.com/avatar/16cf11e07a1e5f95bcd511f767a7656c?s=300);
-    top: 10px;
+    top: 11px;
     position: fixed;
-    right: 6px;
+    right: 15px;
     background-size: cover;
     border-radius: 50%;
     width: 40px;
