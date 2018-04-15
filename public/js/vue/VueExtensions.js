@@ -78,6 +78,11 @@ Vue.prototype.positiveNegative = function(number) {
 	return (number > 0) ? 'positive' : 'negative';
 };
 
+Vue.prototype.pullVanNumber = function(vanTitle) {
+	if (!vanTitle) return '';
+	return vanTitle.split("Van ")[1];
+};
+
 /* ==========================================================================
    Global Filters
    ========================================================================== */
@@ -90,6 +95,7 @@ Vue.filter('plus', Vue.prototype.plus);
 Vue.filter('number', Vue.prototype.formatNumber);
 Vue.filter('humanize', Vue.prototype.humanizeNumber);
 Vue.filter('duration', Vue.prototype.duration);
+Vue.filter('pullVanNumber', Vue.prototype.pullVanNumber);
 
 /* ==========================================================================
    Global Functions

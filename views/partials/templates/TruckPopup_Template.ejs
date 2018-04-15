@@ -2,7 +2,7 @@
     <div class="truck-popup">
         <div class="popup-header">
             <div class="name">
-                Van 3284
+                {{ selectedTruck.title }}
             </div>
             <div class="close" @click="closePopup()">
                 <i class="close icon"></i>
@@ -11,7 +11,7 @@
         <div class="driver">
             <div class="truck-image"></div>
             <div class="number">
-                3284
+                {{ selectedTruck.title | pullVanNumber }}
             </div>
             <label>DRIVER</label>
             <div class="driver-name">{{ selectedTruck.driver }}</div>
