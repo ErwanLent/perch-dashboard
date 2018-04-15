@@ -10,7 +10,7 @@
 
         <div class="truck-list">
             <div class="truck-card" v-for="truck in trucks">
-                <div class="button ui primary tiny">View</div>
+                <div class="button ui primary tiny" @click="showTruckPopup(truck)">View</div>
                 <div class="title">
                     {{ truck.title }}
                 </div>

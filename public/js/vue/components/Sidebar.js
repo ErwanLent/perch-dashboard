@@ -4,6 +4,7 @@ Vue.component('sidebar', {
         return {
             trucks: trucks,
             todaysRevenue: 6013,
+            selectedTruck: {},
             performanceChart: {}
         };
     },
@@ -14,6 +15,19 @@ Vue.component('sidebar', {
         resizeChart: function() {
             this.performanceChart = cloneObject(performanceConfig);
             // this.$refs.performanceChart.chart.reflow();
+        },
+        showTruckPopup: function(truck) {
+            console.log(truck);
+
+            if (!isPopupOpen) {
+                $('.truck-popup').toggle("slide", {
+                    direction: "right"
+                });
+
+                isPopupOpen = true;
+            }
+
+            this.selectedTruck = truck;
         }
     }
 });

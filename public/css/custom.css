@@ -109,7 +109,7 @@
 
 .sidebar .performance-card {
 	background-color: white;
-	padding: 25px;
+	padding: 15px 22px;
     -webkit-box-shadow: 0 0 14px 0 #E4ECEF;
     -moz-box-shadow: 0 0 14px 0 #E4ECEF;
     box-shadow: 0 0 14px 0 #E4ECEF;
@@ -193,4 +193,48 @@
 
 .truck-card .ui.button {
 	margin-top: 11px;
+}
+
+.truck-popup {
+	height: calc(100% - 100px);
+    background-color: white;
+    z-index: 9999;
+    width: 300px;
+    position: absolute;
+    right: 0;
+    top: 100px;
+    -webkit-box-shadow: 0 0 14px 0 #E4ECEF;
+    -moz-box-shadow: 0 0 14px 0 #E4ECEF;
+    box-shadow: 0 0 14px 0 #E4ECEF;
+    -webkit-box-shadow: 1px solid rgba(228, 236, 239, 0.78);
+    -moz-box-shadow: 1px solid rgba(228, 236, 239, 0.78);
+    box-shadow: 1px solid rgba(228, 236, 239, 0.78);
+    /*display: none;*/
+}
+
+.popup-header .name,
+.popup-header .close {
+	display: inline-block;
+}
+
+.popup-header .close {
+	float: right;
+    font-size: 24px;
+    padding-right: 12px;
+    padding-top: 7px;
+    color: #AAAAAA;
+    cursor: pointer;
+}
+
+.popup-header .name {
+	font-size: 23px;
+    font-weight: bold;
+    color: #AAAAAA;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-bottom: 15px;
+}
+
+.popup-header {
+	border-bottom: 1px solid #AAAAAA;
 }

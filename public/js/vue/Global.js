@@ -1,9 +1,4 @@
 /* ==========================================================================
-   Top Level Init Data
-   ========================================================================== */
-
-
-/* ==========================================================================
    Global Variables
    ========================================================================== */
 
@@ -11,6 +6,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZXJ3YW5sZW50IiwiYSI6IjA4YzY2Zjg2OTBkNDY5MDEyO
    
 const LightMapStyleUrl = 'mapbox://styles/erwanlent/cjfytcs2ue6j92srvbdgoblmf';
 const DirectionsBaseUrl = 'https://api.mapbox.com/directions/v5/mapbox/driving/';
+
+let isPopupOpen = false;
 
 /* ==========================================================================
    Data API Endpoints
