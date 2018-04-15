@@ -254,7 +254,7 @@ Vue.component('main-map', {
                 'type': 'symbol',
                 'source': layerId,
                 'layout': {
-                    'icon-image': 'truck2',
+                    'icon-image': 'van4',
                     'icon-allow-overlap': true,
                 }
             });            
@@ -380,7 +380,7 @@ Vue.component('main-map', {
 
             let source = this.map.getSource(truckLayerId);
 
-            setTimeout(() =>  this.animateLogo(), 5000);
+            setTimeout(() =>  this.animateLogo(), 2500);
         },
         animateLogo: function(timestamp) {
             if (counter >= route.length) {

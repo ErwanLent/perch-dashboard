@@ -4,7 +4,7 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXJ3YW5sZW50IiwiYSI6IjA4YzY2Zjg2OTBkNDY5MDEyODBmN2RkOTdjMDc0NTY0In0.NY4En8vkN8h4JvlSDlhLfw';
    
-const LightMapStyleUrl = 'mapbox://styles/erwanlent/cjfytcs2ue6j92srvbdgoblmf';
+const LightMapStyleUrl = 'mapbox://styles/erwanlent/cjg13qsua5ugk2spkr2gzwu6i';
 const DirectionsBaseUrl = 'https://api.mapbox.com/directions/v5/mapbox/driving/';
 
 let isPopupOpen = false;
