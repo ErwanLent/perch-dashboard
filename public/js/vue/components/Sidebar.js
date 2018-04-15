@@ -17,8 +17,6 @@ Vue.component('sidebar', {
             // this.$refs.performanceChart.chart.reflow();
         },
         showTruckPopup: function(truck) {
-            console.log(truck);
-
             if (!isPopupOpen) {
                 $('.truck-popup').toggle("slide", {
                     direction: "right"

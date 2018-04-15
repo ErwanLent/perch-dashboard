@@ -22,9 +22,12 @@
             </div>
             <div class="tabs-container">
                 <div class="ui two item menu">
-                    <div class="item active">Meal Kits</div>
-                    <div class="item">Inventory</div>
+                    <div class="item" @click="key = 'mealKits'"  v-bind:class="[key == 'mealKits' ? 'active' : '']">Meal Kits</div>
+                    <div class="item" @click="key = 'inventory'" v-bind:class="[key == 'inventory' ? 'active' : '']">Inventory</div>
                 </div>                   
+            </div>
+            <div class="inventory-list">
+                <div class="inventory-item" v-for="item in items"></div>
             </div>
         </div>
     </div>

@@ -2,7 +2,9 @@ Vue.component('truck-popup', {
     template: '#truck-popup-template',  
     data: function() {
         return {
-            selectedTruck: {}
+            selectedTruck: {},
+            items: [],
+            key: 'mealKits'
         };
     },
     mounted: function() {
