@@ -11,7 +11,7 @@
         <div class="truck-list">
             <div class="truck-card" v-for="truck in trucks">
                 <div class="button ui primary tiny" @click="showTruckPopup(truck)">View</div>
-                <div class="title">
+                <div class="title" v-bind:class="{ active: truck.inTransit }">
                     {{ truck.title }}
                 </div>
                 <div class="revenue">

@@ -113,7 +113,8 @@ exports.index = (req, res) => {
             }],
             driver: "Billie Anderson",
             "title": "Van 3284",
-            currentLocation: [-118.41497906732975, 33.992388925228944]
+            currentLocation: [-118.41497906732975, 33.992388925228944],
+            inTransit: true
         }, {
             "stops": [{
                 "arrival": 1523752015,

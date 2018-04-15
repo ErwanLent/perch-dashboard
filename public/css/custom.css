@@ -343,3 +343,14 @@
 .inventory-item {
 	margin-bottom: 20px;
 }
+
+.truck-card .title.active::before{
+   content: '';
+   display: inline-block;
+   width: 10px;
+   height: 10px;
+   -moz-border-radius: 7.5px;
+   -webkit-border-radius: 7.5px;
+   border-radius: 7.5px;
+   background-color: #65C97A;
+}
