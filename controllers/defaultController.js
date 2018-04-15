@@ -112,7 +112,8 @@ exports.index = (req, res) => {
                 price: 0.55
             }],
             driver: "Billie Anderson",
-            "title": "Van 3284"
+            "title": "Van 3284",
+            currentLocation: [-118.41497906732975, 33.992388925228944]
         }, {
             "stops": [{
                 "arrival": 1523752015,
@@ -214,7 +215,8 @@ exports.index = (req, res) => {
                 price: 0.55
             }],     
             driver: "James Gallagher",
-            "title": "Van 4286"
+            "title": "Van 4286",
+            currentLocation: [-118.38110421205637, 34.01372921837304]
         }, {
             "stops": [{
                 "arrival": 1523752015,
@@ -301,7 +303,8 @@ exports.index = (req, res) => {
                 price: 0.55
             }],
             driver: "Alvin Kay",
-            "title": "Van 1011"
+            "title": "Van 1011",
+            currentLocation: [-118.3513834425487, 34.01720226392506]
         }, {
             "stops": [{
                 "arrival": 1523752015,
@@ -388,7 +391,8 @@ exports.index = (req, res) => {
                 price: 0.55
             }],
             driver: "Lisa Felton",
-            "title": "Van 1682"
+            "title": "Van 1682",
+            currentLocation: [-118.29646483757972, 33.9451700587415]
         }, {
             "stops": [{
                 "arrival": 1523752015,
@@ -490,7 +494,8 @@ exports.index = (req, res) => {
                 price: 1.29
             }],
             driver: "John Davis",
-            "title": "Van 2550"
+            "title": "Van 2550",
+            currentLocation: [-118.31319913555139, 33.92160454320932]
         }]
     }
 

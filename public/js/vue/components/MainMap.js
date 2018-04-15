@@ -15,12 +15,27 @@ Vue.component('main-map', {
 
             this.add3dBuildings();
             this.getTrucksSchedule();
+            this.loadTruckInitialLocations();
 
             EventBus.$on("newSelectedTruck", truck => {
+                if (truck.title == trucks[0].title) {
+                    this.addMovingTruck(truck.title, [truck.stops[1].lon, truck.stops[1].lat], [truck.stops[2].lon, truck.stops[2].lat]);
+                    return;
+                }
+
                 if (this.truckLocations[truck.title]) {
                     this.zoomIn(this.truckLocations[truck.title].lat, this.truckLocations[truck.title].lon);    
                 }
             });
+        },
+        loadTruckInitialLocations: function() {
+            for (const truck of trucks) {
+                this.bounds.push(truck.currentLocation);
+                this.addTruckLogo(truck.title, truck.currentLocation);
+                this.truckLocations[truck.title] = {lat: truck.currentLocation[1], lon: truck.currentLocation[0]};
+            }
+
+            this.fitBounds();
         },
         add3dBuildings: function() {
             let labelLayerId;
@@ -102,33 +117,23 @@ Vue.component('main-map', {
                             break;
                         }
 
-                        this.bounds.push([stop.lon, stop.lat]);
-                        this.addMovingTruck(truck.title, [stop.lon, stop.lat], [nextStop.lon, nextStop.lat]);
-                        didAlready = true;
+                        // this.bounds.push([stop.lon, stop.lat]);
+                        // this.addMovingTruck(truck.title, [stop.lon, stop.lat], [nextStop.lon, nextStop.lat]);
+                        // didAlready = true;
                         break;
                     }
 
                     if (currentTime < stop.departure) {
                         console.log(`${truck.title} is stopped`);
 
-                        this.bounds.push([stop.lon, stop.lat]);
-                        this.addTruckLogo(truck.title, [stop.lon, stop.lat]);
-                        this.truckLocations[truck.title] = {lat: stop.lat, lon: stop.lon};
+                        // this.bounds.push([stop.lon, stop.lat]);
+                        // this.addTruckLogo(truck.title, [stop.lon, stop.lat]);
+                        // this.truckLocations[truck.title] = {lat: stop.lat, lon: stop.lon};
 
                         break;
                     }                    
                 }
-
-                if (!this.truckLocations[truck.title]) {
-                    const stop = truck.stops[0];
-
-                    this.bounds.push([stop.lon, stop.lat]);
-                    this.addTruckLogo(truck.title, [stop.lon, stop.lat]);
-                    this.truckLocations[truck.title] = {lat: stop.lat, lon: stop.lon};
-                }
             }
-        
-            this.fitBounds();
         },
         fitBounds: function() {
             const bounds = new mapboxgl.LngLatBounds();
@@ -141,7 +146,6 @@ Vue.component('main-map', {
         },
         addMovingTruck: function(truckName, startLocation, endLocation) {
             this.getRoute(startLocation, endLocation, (route) => {
-                console.log(route);
                 this.plotRoute(truckName, route);
             });
         },
@@ -206,7 +210,7 @@ Vue.component('main-map', {
                     "line-cap": "round"
                 },
                 "paint": {
-                    "line-color": "#888",
+                    "line-color": "#65C97A",
                     "line-width": 8
                 }
             });
@@ -368,7 +372,6 @@ Vue.component('main-map', {
             this.addTruckLogo(truckName, [routePoints[0].lon, routePoints[0].lat]);
 
             let source = this.map.getSource(truckLayerId);
-            console.log(route.length);
 
             setTimeout(() =>  this.animateLogo(), 5000);
         },
