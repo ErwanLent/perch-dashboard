@@ -8,6 +8,7 @@ const LightMapStyleUrl = 'mapbox://styles/erwanlent/cjfytcs2ue6j92srvbdgoblmf';
 const DirectionsBaseUrl = 'https://api.mapbox.com/directions/v5/mapbox/driving/';
 
 let isPopupOpen = false;
+let canAnimate = false;
 
 /* ==========================================================================
    Data API Endpoints

@@ -17,6 +17,8 @@ Vue.component('sidebar', {
             // this.$refs.performanceChart.chart.reflow();
         },
         showTruckPopup: function(truck) {
+            canAnimate = false;
+            
             this.selectedTruck = truck;
             EventBus.$emit("newSelectedTruck", truck);
 

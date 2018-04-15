@@ -366,6 +366,7 @@ Vue.component('main-map', {
         },           
         animateRoute: function(truckName, routePoints) {
             route = routePoints;
+            canAnimate = true;
 
             // for (const coords of routePoints) {
             //     this.addCircle([coords.lon,coords.lat]);
@@ -406,7 +407,10 @@ Vue.component('main-map', {
             source._data.features[0].geometry.coordinates = [route[index].lon, route[index].lat];
 
             this.map.getSource(truckLayerId).setData(source._data);
-            this.zoomIn(route[index].lat, route[index].lon, 0.2);    
+
+            if (canAnimate) {
+                this.zoomIn(route[index].lat, route[index].lon, 0.2);      
+            }
             
             requestAnimationFrame(this.animateLogo);
         }
