@@ -28,6 +28,7 @@ Vue.component('sidebar', {
             }
 
             this.selectedTruck = truck;
+            EventBus.$emit("newSelectedTruck", truck);
         }
     }
 });

@@ -1,12 +1,14 @@
 Vue.component('truck-popup', {
-    template: '#truck-popup-template',
+    template: '#truck-popup-template',  
     data: function() {
         return {
-
+            selectedTruck: {}
         };
     },
     mounted: function() {
-
+        EventBus.$on("newSelectedTruck", truck => {
+          this.selectedTruck = truck;
+        });
     },
     methods: {
     	closePopup: function() {

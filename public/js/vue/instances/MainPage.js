@@ -2,6 +2,7 @@ const MainPageInstance = new Vue({
 	el: '#MainPage',
 	data: {
 		visible: true,
+		selectedTruck: {},
 		components: []
 	},
 	mounted: function() {
