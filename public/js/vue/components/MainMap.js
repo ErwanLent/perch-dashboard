@@ -71,12 +71,18 @@ Vue.component('main-map', {
                 }
             }, labelLayerId);
         },
-        zoomIn: function(lat, lon) {
-            this.map.flyTo({
+        zoomIn: function(lat, lon, speed) {
+            const flyToPayload = {
                 center: [lon, lat],
                 zoom: 16,
                 pitch: 60
-            });
+            };
+
+            if (speed) {
+                flyToPayload.speed = speed;
+            }
+
+            this.map.flyTo(flyToPayload);
         },
         getTrucksSchedule: function() {
             // $.get(TruckScheduleEndpoint).done((response) => {
@@ -393,16 +399,15 @@ Vue.component('main-map', {
             }
 
             if (index >= route.length) {
-                setTimeout(() =>  this.animateLogo(), 3000);
                 return;
             }
 
             let source = this.map.getSource(truckLayerId);
             source._data.features[0].geometry.coordinates = [route[index].lon, route[index].lat];
 
-            // Update the source with this new data.
             this.map.getSource(truckLayerId).setData(source._data);
-
+            this.zoomIn(route[index].lat, route[index].lon, 0.2);    
+            
             requestAnimationFrame(this.animateLogo);
         }
     }
