@@ -80,7 +80,37 @@ exports.index = (req, res) => {
                 quantity: 24,
                 price: 12.99
             }],
-            inventory: [],
+            inventory: [{
+                name: 'Steak',
+                image: '/img/inventory/steak.png',
+                quantity: 18,
+                price: 7.99
+            }, {
+                name: 'Asparagus',
+                image: '/img/inventory/asparagus.png',
+                quantity: 35,
+                price: 2.99
+            }, {
+                name: 'Bell Peppers',
+                image: '/img/inventory/bell-pepper.png',
+                quantity: 16,
+                price: 0.99
+            }, {
+                name: 'Potatoes',
+                image: '/img/inventory/potatoe.png',
+                quantity: 24,
+                price: 3.99
+            }, {
+                name: 'Eggplant',
+                image: '/img/inventory/eggplant.png',
+                quantity: 5,
+                price: 1.29
+            }, {
+                name: 'Lemon',
+                image: '/img/inventory/lemon.png',
+                quantity: 22,
+                price: 0.55
+            }],
             driver: "Billie Anderson",
             "title": "Van 3284"
         }, {
@@ -142,7 +172,47 @@ exports.index = (req, res) => {
                 quantity: 11,
                 price: 12.99
             }],
-            inventory: [],     
+            inventory: [{
+                name: 'Scallops',
+                image: '/img/inventory/scallops.png',
+                quantity: 7,
+                price: 6.49
+            }, {
+                name: 'Udon Noodles',
+                image: '/img/inventory/udon-noodles.png',
+                quantity: 11,
+                price: 1.99
+            }, {
+                name: 'Steak',
+                image: '/img/inventory/steak.png',
+                quantity: 18,
+                price: 7.99
+            }, {
+                name: 'Asparagus',
+                image: '/img/inventory/asparagus.png',
+                quantity: 35,
+                price: 2.99
+            }, {
+                name: 'Bell Peppers',
+                image: '/img/inventory/bell-pepper.png',
+                quantity: 16,
+                price: 0.99
+            }, {
+                name: 'Potatoes',
+                image: '/img/inventory/potatoe.png',
+                quantity: 24,
+                price: 3.99
+            }, {
+                name: 'Eggplant',
+                image: '/img/inventory/eggplant.png',
+                quantity: 5,
+                price: 1.29
+            }, {
+                name: 'Lemon',
+                image: '/img/inventory/lemon.png',
+                quantity: 22,
+                price: 0.55
+            }],     
             driver: "James Gallagher",
             "title": "Van 4286"
         }, {
@@ -199,7 +269,37 @@ exports.index = (req, res) => {
                 quantity: 3,
                 price: 12.99
             }],
-            inventory: [],
+            inventory: [{
+                name: 'Lettuce',
+                image: '/img/inventory/lettuce.png',
+                quantity: 12,
+                price: 0.99
+            }, {
+                name: 'Asparagus',
+                image: '/img/inventory/asparagus.png',
+                quantity: 35,
+                price: 2.99
+            }, {
+                name: 'Bell Peppers',
+                image: '/img/inventory/bell-pepper.png',
+                quantity: 16,
+                price: 0.99
+            }, {
+                name: 'Potatoes',
+                image: '/img/inventory/potatoe.png',
+                quantity: 24,
+                price: 3.99
+            }, {
+                name: 'Eggplant',
+                image: '/img/inventory/eggplant.png',
+                quantity: 5,
+                price: 1.29
+            }, {
+                name: 'Lemon',
+                image: '/img/inventory/lemon.png',
+                quantity: 22,
+                price: 0.55
+            }],
             driver: "Alvin Kay",
             "title": "Van 1011"
         }, {
@@ -256,7 +356,37 @@ exports.index = (req, res) => {
                 quantity: 6,
                 price: 12.99
             }],
-            inventory: [],
+            inventory: [{
+                name: 'Scallops',
+                image: '/img/inventory/scallops.png',
+                quantity: 4,
+                price: 6.49
+            }, {
+                name: 'Steak',
+                image: '/img/inventory/steak.png',
+                quantity: 3,
+                price: 7.99
+            }, {
+                name: 'Eggplant',
+                image: '/img/inventory/eggplant.png',
+                quantity: 7,
+                price: 1.29
+            }, {
+                name: 'Bell Peppers',
+                image: '/img/inventory/bell-pepper.png',
+                quantity: 8,
+                price: 0.99
+            }, {
+                name: 'Potatoes',
+                image: '/img/inventory/potatoe.png',
+                quantity: 5,
+                price: 3.99
+            }, {
+                name: 'Lemon',
+                image: '/img/inventory/lemon.png',
+                quantity: 22,
+                price: 0.55
+            }],
             driver: "Lisa Felton",
             "title": "Van 1682"
         }, {
@@ -328,7 +458,37 @@ exports.index = (req, res) => {
                 quantity: 24,
                 price: 12.99
             }],
-            inventory: [],
+            inventory: [{
+                name: 'Steak',
+                image: '/img/inventory/steak.png',
+                quantity: 18,
+                price: 7.99
+            }, {
+                name: 'Lemon',
+                image: '/img/inventory/lemon.png',
+                quantity: 22,
+                price: 0.55
+            }, {
+                name: 'Asparagus',
+                image: '/img/inventory/asparagus.png',
+                quantity: 17,
+                price: 2.99
+            }, {
+                name: 'Bell Peppers',
+                image: '/img/inventory/bell-pepper.png',
+                quantity: 4,
+                price: 0.99
+            }, {
+                name: 'Potatoes',
+                image: '/img/inventory/potatoe.png',
+                quantity: 24,
+                price: 3.99
+            }, {
+                name: 'Eggplant',
+                image: '/img/inventory/eggplant.png',
+                quantity: 5,
+                price: 1.29
+            }],
             driver: "John Davis",
             "title": "Van 2550"
         }]
