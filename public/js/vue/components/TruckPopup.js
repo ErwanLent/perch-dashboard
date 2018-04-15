@@ -37,6 +37,8 @@ Vue.component('truck-popup', {
 
                 isPopupOpen = false;
             }
+
+            $('.crumbs').html('');
     	},
         openClosePopup: function() {
             $('.truck-popup').toggle("slide", {

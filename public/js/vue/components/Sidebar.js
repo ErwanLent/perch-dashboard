@@ -18,7 +18,7 @@ Vue.component('sidebar', {
         },
         showTruckPopup: function(truck) {
             canAnimate = false;
-            
+
             this.selectedTruck = truck;
             EventBus.$emit("newSelectedTruck", truck);
 
@@ -28,7 +28,9 @@ Vue.component('sidebar', {
                 });
 
                 isPopupOpen = true;
-            }            
+            }     
+
+            $('.crumbs').html(truck.title);  
         }
     }
 });
