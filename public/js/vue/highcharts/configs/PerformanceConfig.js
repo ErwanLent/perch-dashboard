@@ -37,17 +37,11 @@ const performanceConfig = {
     },
     plotOptions: {
         area: {
-            marker: {
-                radius: 2
-            },
-            lineWidth: 1,
-            states: {
-                hover: {
-                    lineWidth: 1
-                }
-            },
 			fillColor: '#CAF3AC'
-        }
+        },
+        series: {
+            lineWidth: 3
+        }        
     },
     tooltip: {
         formatter: function () {
@@ -56,7 +50,7 @@ const performanceConfig = {
     },    
     series: [{
         name: 'performance',
-        color: '#CAF3AC',
+        color: '#A5E86D',
         data: [
             6, 11, 32, 110, 235,
             369, 640, 1005, 1436, 2063, 3057, 4618, 6444, 9822, 15468,
