@@ -114,6 +114,14 @@ Vue.component('main-map', {
                         break;
                     }                    
                 }
+
+                if (!this.truckLocations[truck.title]) {
+                    const stop = truck.stops[0];
+                    
+                    this.bounds.push([stop.lon, stop.lat]);
+                    this.addTruckLogo(truck.title, [stop.lon, stop.lat]);
+                    this.truckLocations[truck.title] = {lat: stop.lat, lon: stop.lon};
+                }
             }
         
             this.fitBounds();
