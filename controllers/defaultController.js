@@ -495,7 +495,7 @@ exports.index = (req, res) => {
             }],
             driver: "John Davis",
             "title": "Van 2550",
-            currentLocation: [-118.31319913555139, 33.92160454320932]
+            currentLocation: [-118.3160355, 33.9178707]
         }]
     }
 
