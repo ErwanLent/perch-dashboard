@@ -17,16 +17,16 @@ Vue.component('sidebar', {
             // this.$refs.performanceChart.chart.reflow();
         },
         showTruckPopup: function(truck) {
-            if (!isPopupOpen) {
+            this.selectedTruck = truck;
+            EventBus.$emit("newSelectedTruck", truck);
+
+           if (!isPopupOpen) {
                 $('.truck-popup').toggle("slide", {
                     direction: "right"
                 });
 
                 isPopupOpen = true;
-            }
-
-            this.selectedTruck = truck;
-            EventBus.$emit("newSelectedTruck", truck);
+            }            
         }
     }
 });

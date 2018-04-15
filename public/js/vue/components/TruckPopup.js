@@ -21,7 +21,11 @@ Vue.component('truck-popup', {
     },
     mounted: function() {
         EventBus.$on("newSelectedTruck", truck => {
-          this.selectedTruck = truck;
+            if (isPopupOpen) {
+                this.openClosePopup();
+            }
+
+            this.selectedTruck = truck;
         });
     },
     methods: {
@@ -33,6 +37,15 @@ Vue.component('truck-popup', {
 
                 isPopupOpen = false;
             }
-    	}
+    	},
+        openClosePopup: function() {
+            $('.truck-popup').toggle("slide", {
+                direction: "right"
+            });
+
+            $('.truck-popup').toggle("slide", {
+                direction: "right"
+            });
+        }
     }
 });
