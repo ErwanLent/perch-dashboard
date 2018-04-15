@@ -124,22 +124,22 @@ exports.index = (req, res) => {
             mealKits: [{
                 name: 'Seared Scallops',
                 image: '/img/meals/seared-scallops.png',
-                quantity: 12,
+                quantity: 2,
                 price: 15.99
             }, {
                 name: 'Steak Asparagus',
                 image: '/img/meals/steak-asparagus.png',
-                quantity: 6,
+                quantity: 4,
                 price: 18.99
             }, {
                 name: 'Vegetable Ramen',
                 image: '/img/meals/vegetable-ramen.png',
-                quantity: 14,
+                quantity: 6,
                 price: 14.99
             }, {
                 name: 'Vegetable Medly',
                 image: '/img/meals/vegetable-medley.png',
-                quantity: 24,
+                quantity: 11,
                 price: 12.99
             }],
             inventory: [],     
@@ -181,22 +181,22 @@ exports.index = (req, res) => {
             mealKits: [{
                 name: 'Seared Scallops',
                 image: '/img/meals/seared-scallops.png',
-                quantity: 12,
+                quantity: 0,
                 price: 15.99
             }, {
                 name: 'Steak Asparagus',
                 image: '/img/meals/steak-asparagus.png',
-                quantity: 6,
+                quantity: 9,
                 price: 18.99
             }, {
                 name: 'Vegetable Ramen',
                 image: '/img/meals/vegetable-ramen.png',
-                quantity: 14,
+                quantity: 7,
                 price: 14.99
             }, {
                 name: 'Vegetable Medly',
                 image: '/img/meals/vegetable-medley.png',
-                quantity: 24,
+                quantity: 3,
                 price: 12.99
             }],
             inventory: [],
@@ -238,22 +238,22 @@ exports.index = (req, res) => {
             mealKits: [{
                 name: 'Seared Scallops',
                 image: '/img/meals/seared-scallops.png',
-                quantity: 12,
+                quantity: 9,
                 price: 15.99
             }, {
                 name: 'Steak Asparagus',
                 image: '/img/meals/steak-asparagus.png',
-                quantity: 6,
+                quantity: 7,
                 price: 18.99
             }, {
                 name: 'Vegetable Ramen',
                 image: '/img/meals/vegetable-ramen.png',
-                quantity: 14,
+                quantity: 12,
                 price: 14.99
             }, {
                 name: 'Vegetable Medly',
                 image: '/img/meals/vegetable-medley.png',
-                quantity: 24,
+                quantity: 6,
                 price: 12.99
             }],
             inventory: [],

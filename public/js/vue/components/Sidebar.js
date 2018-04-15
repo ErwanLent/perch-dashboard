@@ -3,7 +3,7 @@ Vue.component('sidebar', {
     data: function() {
         return {
             trucks: trucks,
-            todaysRevenue: 6013,
+            todaysRevenue: 4018,
             selectedTruck: {},
             performanceChart: {}
         };
