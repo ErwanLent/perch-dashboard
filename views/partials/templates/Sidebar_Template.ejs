@@ -3,7 +3,9 @@
         <div class="performance-card">
             <h2>Performance</h2>
             <label>REVENUE TODAY</label>
-            <h6>$6,013</h6>
+            <h6>${{ todaysRevenue | number }}</h6>
+
+            <highcharts :options="performanceChart" ref="performanceChart" class="performance-chart"></highcharts>
         </div>
     </div>
 </script>
