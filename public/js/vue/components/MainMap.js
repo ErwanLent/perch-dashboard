@@ -254,7 +254,7 @@ Vue.component('main-map', {
                 'type': 'symbol',
                 'source': layerId,
                 'layout': {
-                    'icon-image': 'van4',
+                    'icon-image': 'van5',
                     'icon-allow-overlap': true,
                 }
             });            
