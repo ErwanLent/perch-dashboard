@@ -367,6 +367,7 @@ Vue.component('main-map', {
             }
 
             if (index >= route.length) {
+                setTimeout(() =>  this.animateLogo(), 3000);
                 return;
             }
 
