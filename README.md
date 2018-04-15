@@ -31,4 +31,4 @@ node app.js
 
 #### Dashboard Preview
 
-![Dashboard](https://i.imgur.com/FvjFbsZ.jpg)
+![Dashboard](https://i.imgur.com/X17kMmR.jpg)
