@@ -394,6 +394,7 @@ Vue.component('main-map', {
             let endTimestamp = startTimestamp + (distance * 5);
             let progress = (timestamp - startTimestamp) / (endTimestamp - startTimestamp);
             let index = Math.round(progress * route.length);
+            panCounter++;
 
             if (timestamp == undefined) {
                 index = 1;
@@ -408,7 +409,7 @@ Vue.component('main-map', {
 
             this.map.getSource(truckLayerId).setData(source._data);
 
-            if (canAnimate) {
+            if (canAnimate && panCounter % 20 == 0) {
                 this.zoomIn(route[index].lat, route[index].lon, 0.2);      
             }
             
@@ -422,3 +423,4 @@ let route;
 let truckLayerId;
 let startTimestamp = 0;
 let distance = 0;
+let panCounter = 0;
