@@ -221,7 +221,7 @@
 	float: right;
     font-size: 24px;
     padding-right: 12px;
-    padding-top: 7px;
+    padding-top: 6px;
     color: #AAAAAA;
     cursor: pointer;
 }
@@ -237,4 +237,41 @@
 
 .popup-header {
 	border-bottom: 1px solid #AAAAAA;
+}
+
+.truck-popup .driver .number {
+	font-size: 27px;
+    font-weight: bold;
+    margin-bottom: -4px;
+}
+
+.truck-popup .driver {
+	padding: 21px 24px;
+	-webkit-box-shadow: 0 0 14px 0 #E4ECEF;
+    -moz-box-shadow: 0 0 14px 0 #E4ECEF;
+    box-shadow: 0 0 14px 0 #E4ECEF;
+    -webkit-box-shadow: 1px solid rgba(228, 236, 239, 0.78);
+    -moz-box-shadow: 1px solid rgba(228, 236, 239, 0.78);
+    box-shadow: 1px solid rgba(228, 236, 239, 0.78);	
+}
+
+.truck-popup .driver label {
+	font-size: 10px;
+    font-weight: bold;
+    color: #A8A8A8;
+}
+
+.truck-popup .driver .driver-name {
+	font-size: 16px;
+    font-weight: bold;
+    margin-top: -16px;
+}
+
+.truck-popup .truck-image {
+	width: 110px;
+    height: 100PX;
+    float: right;
+    background-image: url(/img/truck.png);
+    background-size: contain;
+    background-repeat: no-repeat;	
 }

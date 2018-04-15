@@ -9,6 +9,14 @@ Vue.component('truck-popup', {
 
     },
     methods: {
+    	closePopup: function() {
+            if (isPopupOpen) {
+                $('.truck-popup').toggle("slide", {
+                    direction: "right"
+                });
 
+                isPopupOpen = false;
+            }
+    	}
     }
 });
