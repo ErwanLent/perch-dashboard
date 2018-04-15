@@ -105,7 +105,7 @@ Vue.component('main-map', {
                 }
             }
         
-            this.fitBounds();
+            //this.fitBounds();
         },
         fitBounds: function() {
             const bounds = new mapboxgl.LngLatBounds();
@@ -140,6 +140,8 @@ Vue.component('main-map', {
 
                 callback(route);
             });
+            
+            this.zoomIn(startLocation[1], startLocation[0]);
         },     
         generatePointFeature: function(coordinates) {
             return {
