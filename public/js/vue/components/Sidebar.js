@@ -3,10 +3,16 @@ Vue.component('sidebar', {
     data: function() {
         return {
             todaysRevenue: 6013,
-            performanceChart: cloneObject(performanceConfig)
+            performanceChart: {}
         };
     },
+    mounted: function() {
+        setTimeout(() => this.resizeChart(), 1500);
+    },
     methods: {
-
+        resizeChart: function() {
+            this.performanceChart = cloneObject(performanceConfig);
+            // this.$refs.performanceChart.chart.reflow();
+        }
     }
 });
