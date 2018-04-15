@@ -28,10 +28,10 @@
             </div>
             <div class="inventory-list">
                 <div class="inventory-item" v-for="item in items">
-                    <div class="inventory-image"></div>
-                    <div class="remaining">{{ item.remaining }}</div>
+                    <div class="inventory-image" v-bind:style="{ backgroundImage: 'url(' + item.image + ')' }"></div>
+                    <div class="price">${{ item.price }}</div>
+                    <div class="remaining">{{ item.quantity }} Remaining</div>
                     <div class="name">{{ item.name }}</div>
-                    <div class="price">{{ item.price }}</div>
                 </div>
             </div>
         </div>

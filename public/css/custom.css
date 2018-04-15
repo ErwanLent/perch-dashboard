@@ -308,3 +308,38 @@
     margin-left: 20px;
     margin-top: 20px;
 }
+
+.inventory-list .inventory-image {
+	width: 45px;
+    height: 45px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;
+}
+
+.inventory-list .remaining {
+	font-size: 16px;
+    font-weight: bold;
+    padding-left: 55px;
+}
+
+.inventory-list .name {
+	display: block;
+    padding-left: 55px;
+    margin-top: -10px;	
+    font-size: 17px;
+}
+
+.inventory-list .price {
+	float: right;
+}
+
+.inventory-list {
+	padding: 20px;
+	max-height: 350px;
+    overflow-y: auto;
+}
+
+.inventory-item {
+	margin-bottom: 20px;
+}
